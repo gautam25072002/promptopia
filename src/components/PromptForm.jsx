@@ -29,7 +29,9 @@ const PromptForm = ({text,postData}) => {
                     if(postData){
                         toast.success("Prompt updated successfully!")
                     }
-                    toast.success("Prompt created successfully!")
+                    else {
+                        toast.success("Prompt created successfully!")
+                    }
                 }
             } catch(error){
                 toast.error("Server error")
