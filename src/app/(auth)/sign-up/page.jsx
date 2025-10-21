@@ -7,18 +7,20 @@ import Register from '@/actions/register'
 const SignUp = () => {
 
   return (
-    <div className="min-h-screen flex justify-around items-center font-bold w-full">
-      <div className="text-7xl font-extrabold tracking-tight w-[40%]">
-        Get Started
-        <span className="text-md block my-2">With</span>
-        <span className="block bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent text-4xl tracking-wider">
-          Promptopia
-        </span>
+    <div className="h-full flex flex-col md:flex-row justify-around items-center font-bold w-full gap-4 p-4">
+      <div className="text-6xl w-full font-extrabold tracking-tight text-center md:text-start md:ml-4 hidden md:block">
+       <p>
+           Get Started 
+          <span className="text-md md:block my-2 mx-2">With</span>
+          <span className="block bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent text-4xl tracking-wider">
+            Promptopia
+          </span>
+       </p>
       </div>
 
-      <div className="w-[60%] flex flex-col lg:flex-row lg:w-[50%] gap-4 lg:justify-center lg:items-center">
-        <div className="w-80 flex flex-col gap-4">
-          <h1 className="text-5xl text-center mb-4">Sign Up</h1>
+      <div className="w-[60%] flex flex-col lg:flex-row lg:w-[50%] gap-4 lg:justify-center lg:items-center mt-6">
+        <div className="md:w-80 w-full flex flex-col gap-4">
+          <h1 className='text-4xl font-bold text-center md:hidden  mb-4 '>Register for <span className='font-extrabold bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent'>Promptopia</span></h1>
           <div className="border-2 px-4 py-3 flex justify-center items-center gap-2 rounded-md">
             <FcGoogle size={20} />
             <GoogleSignIn />

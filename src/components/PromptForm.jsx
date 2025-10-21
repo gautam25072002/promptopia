@@ -26,6 +26,9 @@ const PromptForm = ({text,postData}) => {
                 })
                 if(res.ok) {
                     router.push(postData ? '/profile' : '/')
+                    if(postData){
+                        toast.success("Prompt updated successfully!")
+                    }
                     toast.success("Prompt created successfully!")
                 }
             } catch(error){

@@ -22,7 +22,7 @@ const PromptCard = ({post,session,isSession,handleDelete,search,setSearch,handle
     }
 
   return (
-    <div className='bg-transparent w-[400px] h-[250px] p-4 rounded-lg border-2 border-gray-700 md:w-[300px] md:h-[240px] hover:scale-110 transition-all duration-300 hover:shadow-[0px_4px_10px_rgba(25,25,25,0.8)] shadow overflow-hidden'>
+    <div className='bg-transparent w-[350px] h-[250px] p-4 rounded-lg border-2 border-gray-700 md:w-[300px] md:h-[240px] hover:scale-110 transition-all duration-300 hover:shadow-[0px_4px_10px_rgba(25,25,25,0.8)] shadow overflow-hidden'>
         <div className='flex justify-between items-center'>
             <div className='flex justify-start items-center gap-2'>
                 <Image src={image} width={35} height={35} alt="user image" className='rounded-full object-contain cursor-pointer' onClick={handleProfileClick}/>
