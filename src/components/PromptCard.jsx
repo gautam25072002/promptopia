@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import EditButton from './EditButton'
+import LikeButton from "./LikeButton";
+// import { useSession } from "next-auth/react";
 
 const PromptCard = ({post,session,isSession,handleDelete,search,setSearch,handleTagClick}) => {
     const image = post.creator.image ? (post.creator.image) : 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
@@ -58,6 +60,15 @@ const PromptCard = ({post,session,isSession,handleDelete,search,setSearch,handle
             <EditButton id={post._id}/>
         </div>
       ) : ''}
+
+        <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-100">
+        <LikeButton
+            promptId={post._id}
+            initialLikes={post.likes?.length || 0}
+            initialIsLiked={post.likes?.map(id => id.toString()).includes(session?.user?.id) || false}
+            session={session}
+        />
+        </div>
     </div>
   )
 }

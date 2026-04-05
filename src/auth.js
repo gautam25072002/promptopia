@@ -9,7 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     // Google login
     GoogleProvider({
-      clientId:process.env.GOOGLE_CLIENT_ID,
+      clientId:process.env.GOOGLE_ID,
       clientSecret:process.env.GOOGLE_CLIENT_SECRET
     }),
     Credentials({
@@ -25,24 +25,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           placeholder: "*****",
         }
       },
-      authorize: async (credentials) => { 
-        await connectToDB()
-        const findByEmail = await User.findOne({email:credentials.email})
-        if(!findByEmail){
-          throw new Error("User not found")
+      authorize: async (credentials) => {
+        try {
+          console.log("Email:", credentials.email)
+          
+          await connectToDB()
+          console.log("=== DB CONNECTED ===")
+          
+          const findByEmail = await User.findOne({ email: credentials.email })
+          
+          if (!findByEmail) return null
+      
+          const isValid = await bcrypt.compare(credentials.password, findByEmail.password)
+          
+          if (!isValid) return null
+      
+          return {
+            id: findByEmail._id.toString(),
+            name: findByEmail.name,
+            email: findByEmail.email
+          }
+        } catch (error) {
+          console.error("=== AUTH ERROR ===", error)
+          return null
         }
-
-        const user = await bcrypt.compare(credentials.password,findByEmail.password)
-
-        if(!user){
-          throw new Error("Invalid credentials")
-        }
-        return {
-          id:findByEmail._id.toString(),
-          name:findByEmail.name,
-          email:findByEmail.email
-        }
-      },
+      }
   })
   ],
   callbacks: {

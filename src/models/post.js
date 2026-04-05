@@ -12,7 +12,13 @@ const postSchema = new mongoose.Schema({
     tag:{
         type: String,
         required:[true,"Tag is required"]
-    }
+    },
+    likes: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "user",
+        }
+    ]
 })
 
 const Post = mongoose.models.post || mongoose.model('post',postSchema)

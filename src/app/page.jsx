@@ -19,7 +19,7 @@ const HomePage = async () => {
             AI-Powered Prompts
           </span>
         </h1>
-        <p className="mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl text-center">
+        <p className="mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl text-center"> 
           Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts
         </p>
         {!session ? (<button className="mt-6 bg-amber-600 px-5 py-2 text-md shadow-amber-200 rounded">

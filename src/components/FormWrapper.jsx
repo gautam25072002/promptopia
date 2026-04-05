@@ -39,7 +39,7 @@ const FormWrapper = ({text}) => {
                 </form>
                 
                 <p className='text-sm text-gray-600'>
-                    Already have an account? {' '}
+                    New user? {' '}
                     <Link href="/sign-up" className='text-blue-500 hover:underline lg:'>SignUp</Link>
                 </p>
             </div>
