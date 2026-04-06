@@ -1,41 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-
-export default function LikeButton({ promptId, initialLikes, initialIsLiked, session}) {
+export default function LikeButton({ promptId, initialLikes, initialIsLiked, session }) {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLike = async () => {
-    console.log("===== SESSION ======",session)
-    console.log("===== USER ======",session?.user)
-    if (status === "loading") return 
-
-    if (status === "unauthenticated"){
-      router.push("/sign-in")
-      return 
+    if (!session?.user) {
+      router.push("/sign-in");
+      return;
     }
-    // if (!session?.user) {
-    //   router.push("/sign-in");
-    //   return;
-    // }
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/prompt/${promptId}/like`, {
+      const res = await fetch(`api/prompt/${promptId}/like`, {
         method: "POST",
       });
-      if (res.status === 401){
-        router.push("/sign-in")
-        return
+
+      if (res.status === 401) {
+        router.push("/sign-in");
+        return;
       }
+
       const data = await res.json();
-      if (data.likes !== undefined){
+      if (data.likes !== undefined) {
         setLikes(data.likes);
         setIsLiked(data.isLiked);
       }
@@ -51,9 +43,7 @@ export default function LikeButton({ promptId, initialLikes, initialIsLiked, ses
       onClick={handleLike}
       disabled={loading}
       className={`flex items-center gap-1.5 text-sm transition-colors ${
-        isLiked
-          ? "text-red-500"
-          : "text-gray-400 hover:text-red-400"
+        isLiked ? "text-red-500" : "text-gray-400 hover:text-red-400"
       }`}
     >
       <svg
