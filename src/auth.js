@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt'
 import { connectToDB } from "./app/utils/db"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  trustHost: ture,
+  trustHost: true,
   providers: [
     // Google login
     GoogleProvider({
