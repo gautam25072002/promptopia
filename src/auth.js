@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt'
 import { connectToDB } from "./app/utils/db"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: ture,
   providers: [
     // Google login
     GoogleProvider({
@@ -27,10 +28,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          console.log("Email:", credentials.email)
           
           await connectToDB()
-          console.log("=== DB CONNECTED ===")
           
           const findByEmail = await User.findOne({ email: credentials.email })
           
@@ -43,7 +42,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return {
             id: findByEmail._id.toString(),
             name: findByEmail.name,
-            email: findByEmail.email
+            email: findByEmail.email,
+            image: findByEmail.image
           }
         } catch (error) {
           console.error("=== AUTH ERROR ===", error)
